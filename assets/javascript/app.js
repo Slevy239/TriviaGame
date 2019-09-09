@@ -4,7 +4,7 @@ $(document).ready(function () {
         {
             question: "Why",
             choices: ["why not", "why not", "why not"],
-            correctAnswer: "Why not"   
+            correctAnswer: "Why not"
         },
 
         {
@@ -23,46 +23,54 @@ $(document).ready(function () {
     ]
 
 
-    var counter = 30;
+    var count = 30;
     var currentQuestion = 0;
-    var score = 0;
-    var lost = 0;
     var timer;
 
 
     function loadQuestion() {
+        count = 30;
+        timer = setInterval(timer, 1000)
         var question = quizQuestions[currentQuestion].question;
         var choices = quizQuestions[currentQuestion].choices;
+
+        $('#questions').html('<h4>' + question + '</h4>');
+        $('#poss').html(choices);
+
+
         console.log(question)
         console.log(choices);
         console.log(quizQuestions.length)
     }
-    loadQuestion()
-})
+    loadQuestion();
 
 
 
-//     function timer () {
-//         var counter = 16;
+    function loadChoices(choices) {
+        var result = '';
 
-//         setInterval(function () {
-//             counter--;
-//             if (counter >= 0) {
-//                 for (i = 0; i < poss.length; i++) {
-//                 var AnswerButton = $("<button>");
-//                 AnswerButton.text(poss[i]);
-//                 span = document.getElementById("time-left");
-//                 span.innerHTML = counter;
-//                 $("#questions").text(questions);
-//             }
-//         }
-//             if (counter === 0) {
-//                 clearInterval(counter);
-//                 // once counter reaches 0, refresh page and show results
-//                 $("#answers").text(answers);
-//             }
-//         }, 1000);
-//     };
-//     timer();
-   
-// })
+        for (let i = 0; i < choices.length; i++) {
+            result += '<p class="choice">'+ choices[i] + '</p>'
+
+        }
+        return result;
+    }
+    loadChoices();
+    
+    
+    
+    function timer () {
+            count--;
+            $('#time-left').html(count)
+
+            if (count === 0) {
+                clearTimer();
+            }
+}
+
+
+
+    function clearTimer () {
+        clearInterval(timer)
+    }
+    });
