@@ -21,8 +21,14 @@ $(document).ready(function () {
             choices: ["John Elway", "Tom Brady", "Joe Namath", "Carson Wentz"],
             correctAnswer: "Carson Wentz"
 
-        }
+        },
 
+        {
+            question: "What planet's days are longer than it's years?",
+            choices: ["Mercury", "Neptune", "Pluto", "Earth"],
+            correctAnswer: "Mercury"
+
+        },
     ]
 
 
@@ -41,15 +47,17 @@ $(document).ready(function () {
         loadQuestion();
     }
 
-
+//loads random question, once start button is clicked
+//gives 10 second counter for each question.
     function loadQuestion() {
+        var currentQuestion = 0;
         answered = false;
         var correctAnswer = quizQuestions[currentQuestion].correctAnswer;
         counter = 10;
         timer = setInterval(timer, 1000);
         correct = quizQuestions[currentQuestion].correctAnswer;
         var question = quizQuestions[currentQuestion].question;
-        $('#questions').append(question);
+        $('#questions').text(question);
         for (var i = 0; i < 4; i++) {
             var newChoices = quizQuestions[currentQuestion].choices[i];
             $('#choices').append('<h4 id=' + i + '>' + newChoices + '</h4>')
@@ -57,27 +65,27 @@ $(document).ready(function () {
 
         $("h4").click(function () {
             var id = $(this).attr('id');
+
             if (id = correctAnswer) {
+                $("#choices").html('');
                 answered = true;
                 $('#questions').append('the answer is: ' + quizQuestions[currentQuestion].correctAnswer);
-                userResponse();
+                nextQuestion();
                 correct++;
             }
             else {
-                userResponse(); 
+                nextQuestion(); 
                 incorrect++
             }
         })
     }
 
 
-    function userResponse() {
-        nextQuestion();
-    }
 
 
     function nextQuestion() {
         currentQuestion++;
+        answered = false;
         if (currentQuestion < quizQuestions.length) {
             loadQuestion()
         }
@@ -85,7 +93,7 @@ $(document).ready(function () {
                 $('#questions').remove();
                 $('#time-left').remove();
                 $('#correct').append('<h4>Correct Answers:' + correct + '</h4>')
-                $('#incorrect').append('<h4>Correct Answers:' + incorrect + '</h4>');
+                $('#incorrect').append('<h4>Incorrect Answers:' + incorrect + '</h4>');
         }
     }
 
