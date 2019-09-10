@@ -1,4 +1,4 @@
-  
+
 $(document).ready(function () {
 
     var quizQuestions = [
@@ -8,23 +8,25 @@ $(document).ready(function () {
             correctAnswer: "1983"
 
         },
-        {
-            question: "Why",
-            choices: ["why not", "why not", "why not", "ok"],
-            correctAnswer: "Why not"   
-        },
-
 
         {
             question: "where did Phish orignally form?",
             choices: ["Colorado", "New Jersey", "Vermont", "Pennsylvania"],
             correctAnswer: "Vermont"
 
+        },
+
+        {
+            question: "Who is the Eagles Starting Quarterback?",
+            choices: ["John Elway", "Tom Brady", "Joe Namath", "Carson Wentz"],
+            correctAnswer: "Carson Wentz"
+
         }
+
     ]
 
 
-    var counter = 30;
+    var counter = 10;
     var currentQuestion = 0;
     var correct = 0;
     var incorrect = 0;
@@ -37,92 +39,77 @@ $(document).ready(function () {
         correct = 0;
         incorrect = 0;
         loadQuestion();
-        timer();
     }
 
 
     function loadQuestion() {
         answered = false;
         var correctAnswer = quizQuestions[currentQuestion].correctAnswer;
-        counter = 30;
+        counter = 10;
         timer = setInterval(timer, 1000);
         correct = quizQuestions[currentQuestion].correctAnswer;
         var question = quizQuestions[currentQuestion].question;
-        $('#questions').html(question);
+        $('#questions').append(question);
         for (var i = 0; i < 4; i++) {
             var newChoices = quizQuestions[currentQuestion].choices[i];
             $('#choices').append('<h4 id=' + i + '>' + newChoices + '</h4>')
         }
-        
+
         $("h4").click(function () {
             var id = $(this).attr('id');
             if (id = correctAnswer) {
                 answered = true;
-                $('#questions').html('the answer is: ' + quizQuestions[currentQuestion].correctAnswer);
-                correctAnswer();
-                userAnswer();
+                $('#questions').append('the answer is: ' + quizQuestions[currentQuestion].correctAnswer);
+                userResponse();
+                correct++;
+            }
+            else {
+                userResponse(); 
+                incorrect++
             }
         })
     }
-    
-    function correctAnswer() {
-        correct++;
+
+
+    function userResponse() {
         nextQuestion();
-
     }
 
-    function incorrectanswer() {
-        incorrect++;
-        nextQuestion()
-
-    }
-
-    function unanswered() {
-        if (counter <= 0) {
-        incorrect++;
-        nextQuestion();
-        }
-    }
 
     function nextQuestion() {
         currentQuestion++;
-    }
-
-    function userAnswer() {
-        if (id === correctAnswer) {
-            correctAnswer();
-        } else {
-            incorrectanswer();
+        if (currentQuestion < quizQuestions.length) {
+            loadQuestion()
+        }
+        else {
+                $('#questions').remove();
+                $('#time-left').remove();
+                $('#correct').append('<h4>Correct Answers:' + correct + '</h4>')
+                $('#incorrect').append('<h4>Correct Answers:' + incorrect + '</h4>');
         }
     }
 
 
-    function results() {
-        if (currentQuestion > 5) {
-            $('#correct').html(correct);
-            $('#correct').html(incorrect);
-
-        }
-    }results();
 
     $('#start').on("click", function () {
         $('#start');
         startGame()
     })
-    
-    
+
+
     function timer() {
         if (counter === 0) {
             answered = true;
             clearInterval(timer);
             $('#questions').html("correct");
             unanswered();
-        } else if (answered === true) {
+        } 
+        else if (answered === true) {
             clearInterval(timer);
-        } else {
+        } 
+        else {
             counter--;
             $('#time-left').html(counter);
         }
     };
 })
-   
