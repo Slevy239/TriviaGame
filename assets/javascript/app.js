@@ -47,16 +47,15 @@ $(document).ready(function () {
         loadQuestion();
     }
 
-//loads random question, once start button is clicked
-//gives 10 second counter for each question.
+    //loads random question, once start button is clicked
+    //gives 10 second counter for each question.
     function loadQuestion() {
-        var currentQuestion = 0;
         answered = false;
-        var correctAnswer = quizQuestions[currentQuestion].correctAnswer;
         counter = 10;
         timer = setInterval(timer, 1000);
         correct = quizQuestions[currentQuestion].correctAnswer;
         var question = quizQuestions[currentQuestion].question;
+        var correctAnswer = quizQuestions[currentQuestion].correctAnswer;
         $('#questions').text(question);
         for (var i = 0; i < 4; i++) {
             var newChoices = quizQuestions[currentQuestion].choices[i];
@@ -67,14 +66,14 @@ $(document).ready(function () {
             var id = $(this).attr('id');
 
             if (id = correctAnswer) {
-                $("#choices").html('');
+                $('#choices').html('');
                 answered = true;
                 $('#questions').append('the answer is: ' + quizQuestions[currentQuestion].correctAnswer);
                 nextQuestion();
                 correct++;
             }
             else {
-                nextQuestion(); 
+                nextQuestion();
                 incorrect++
             }
         })
@@ -93,7 +92,7 @@ $(document).ready(function () {
                 $('#questions').remove();
                 $('#time-left').remove();
                 $('#correct').append('<h4>Correct Answers:' + correct + '</h4>')
-                $('#incorrect').append('<h4>Incorrect Answers:' + incorrect + '</h4>');
+                $('#incorrect').append('<h4>Correct Answers:' + incorrect + '</h4>');
         }
     }
 
