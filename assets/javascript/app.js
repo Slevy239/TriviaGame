@@ -70,11 +70,13 @@ $(document).ready(function () {
                 answered = true;
                 $('#questions').append('the answer is: ' + quizQuestions[currentQuestion].correctAnswer);
                 nextQuestion();
+                console.log('right')
                 correct++;
             }
             else {
                 nextQuestion();
                 incorrect++
+                console.log('wrong')
             }
         })
     }
