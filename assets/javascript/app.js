@@ -51,7 +51,7 @@ $(document).ready(function () {
     //gives 10 second counter for each question.
     function loadQuestion() {
         answered = false;
-        counter = 10;
+        counter = 11;
         timer = setInterval(timer, 1000);
         correct = quizQuestions[currentQuestion].correctAnswer;
         var question = quizQuestions[currentQuestion].question;
@@ -118,7 +118,7 @@ $(document).ready(function () {
         } 
         else {
             counter--;
-            $('#time-left').html(counter);
+            $('#time-left').html(counter + ' Seconds left!');
         }
     };
 })
