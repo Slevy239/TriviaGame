@@ -63,7 +63,7 @@ $(document).ready(function () {
         }
     ]
 
-// variables
+    // variables
     var counter = 10;
     var currentQuestion = 0;
     var correct = 0;
@@ -71,9 +71,9 @@ $(document).ready(function () {
     var timer;
     var correctAnswer;
 
-//start game function removes button, resets score and loads first question
+    //start game function removes button, resets score and loads first question
 
-    function startGame() { 
+    function startGame() {
         $('#start').remove();
         currentQuestion = 0;
         correct = 0;
@@ -106,40 +106,42 @@ $(document).ready(function () {
                 $('#choices').text('');
                 answered = true;
                 correct++;
-                rightAnswer()
+                $('#questions').append('<div>');
+                $('#questions').text("Correct")
+                setTimeout(rightAnswer, 1000 * 3);
+
             }
             else {
                 incorrect++
-                wrongAnswer();
+
+                $('#questions').append('<div>');
+                $('#questions').text('WRONG!, the answer was: ' + quizQuestions[currentQuestion].correctAnswer)
+                setTimeout(wrongAnswer, 1000 * 5);
             }
         })
     }
 
     function rightAnswer() {
         //loads next question
-            $('#questions').html('Correct answer!')
-            $('#choices').html('')
-            nextQuestion()
 
+        $('#choices').html('')
+        nextQuestion()
     }
 
     function wrongAnswer() {
         //shows correct answer and loads next question  
-            $('#questions').html('the answer is: ' + quizQuestions[currentQuestion].correctAnswer)
-            $('#choices').html('')
+        $('#choices').html('')
 
         nextQuestion()
     }
 
 
-
-//goes to next question
-//resets timer
-//if there are still questions left, it will go to the next question
-//if all questions are asked, results will be presented
+    //goes to next question
+    //resets timer
+    //if there are still questions left, it will go to the next question
+    //if all questions are asked, results will be presented
     function nextQuestion() {
         var questionTotal = quizQuestions.length;
-        console.log(questionTotal)
         currentQuestion++;
         answered = false;
         if (currentQuestion < quizQuestions.length) {
@@ -153,16 +155,15 @@ $(document).ready(function () {
         }
     }
 
-
-//on click function 
+    //on click function to start game
     $('#start').on("click", function () {
         $('#start');
         startGame()
     })
 
-// timer function
-//when it hits 0, interval will be stopped,
-//otherwise, the clock will continue to countdown
+    // timer function
+    //when it hits 0, interval will be stopped,
+    //otherwise, the clock will continue to countdown
     function timer() {
         if (counter === 0) {
             answered = true;
