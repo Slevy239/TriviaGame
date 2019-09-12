@@ -10,7 +10,7 @@ $(document).ready(function () {
         },
 
         {
-            question: "where did Phish orignally form?",
+            question: "Where did Phish orignally form?",
             choices: ["Colorado", "New Jersey", "Vermont", "Pennsylvania"],
             correctAnswer: "Vermont"
 
@@ -63,23 +63,35 @@ $(document).ready(function () {
         }
 
         $("h4").click(function () {
-            var id = $(this).attr('id');
-
-            if (id = correctAnswer) {
-                $('#choices').html('');
+            
+            if ($(this).text() === correctAnswer) {
+                $('#choices').text('');
                 answered = true;
-                $('#questions').append('the answer is: ' + quizQuestions[currentQuestion].correctAnswer);
-                nextQuestion();
-                console.log('right')
                 correct++;
+                rightAnswer()
             }
             else {
-                nextQuestion();
                 incorrect++
-                console.log('wrong')
+                wrongAnswer();
             }
         })
     }
+
+    function rightAnswer() {
+        //show the answer and score for 3 seconds then move to next question
+            $('#questions').html('Correct answer!')
+            $('#choices').html('')
+            nextQuestion()
+
+    }
+
+    function wrongAnswer() {
+            $('#questions').html('the answer is: ' + quizQuestions[currentQuestion].correctAnswer)
+            $('#choices').html('')
+
+        nextQuestion()
+    }
+
 
 
 
@@ -91,10 +103,10 @@ $(document).ready(function () {
             loadQuestion()
         }
         else {
-                $('#questions').remove();
-                $('#time-left').remove();
-                $('#correct').append('<h4>Correct Answers:' + correct + '</h4>')
-                $('#incorrect').append('<h4>Correct Answers:' + incorrect + '</h4>');
+            $('#questions').remove();
+            $('#time-left').remove();
+            $('#correct').append('<h4>Correct Answers: ' + correct + '</h4>')
+            $('#incorrect').append('<h4>Incorrect Answers: ' + incorrect + '</h4>');
         }
     }
 
@@ -111,11 +123,10 @@ $(document).ready(function () {
             answered = true;
             clearInterval(timer);
             $('#questions').html("correct");
-            unanswered();
-        } 
+        }
         else if (answered === true) {
             clearInterval(timer);
-        } 
+        }
         else {
             counter--;
             $('#time-left').html(counter + ' Seconds left!');
