@@ -6,29 +6,61 @@ $(document).ready(function () {
             question: "When did Phish start performing as a band?",
             choices: ["1985", "1990", "1983", "1993"],
             correctAnswer: "1983"
-
         },
 
         {
             question: "Where did Phish orignally form?",
             choices: ["Colorado", "New Jersey", "Vermont", "Pennsylvania"],
             correctAnswer: "Vermont"
-
         },
 
         {
             question: "Who is the Eagles Starting Quarterback?",
             choices: ["John Elway", "Tom Brady", "Joe Namath", "Carson Wentz"],
             correctAnswer: "Carson Wentz"
-
         },
 
         {
             question: "What planet's days are longer than it's years?",
             choices: ["Mercury", "Neptune", "Pluto", "Earth"],
             correctAnswer: "Mercury"
-
         },
+
+        {
+            question: "Who directed E.T.?",
+            choices: ["Stanley Kubrick", "James Cameron", " Tim Burton", "Steven Spielberg"],
+            correctAnswer: "Steven Spielberg"
+        },
+
+        {
+            question: "In what sport is a shuttlecock used?",
+            choices: ["Table Tennis", "Badminton", "Rugby", "Crickey"],
+            correctAnswer: "Badminton"
+        },
+
+        {
+            question: "What color is the circle on the Japanese flag?",
+            choices: ["Red", "White", "Yellow", "Black"],
+            correctAnswer: "Red"
+        },
+
+        {
+            question: "How many countries does the United States border?",
+            choices: ["1", "2", "3", "4"],
+            correctAnswer: "2"
+        },
+
+        {
+            question: "What is the capital of Pennsylvania?",
+            choices: ["Philadelphia", "Pittsburgh", "Gettysburg", "Harrisburg"],
+            correctAnswer: "Harrisburg"
+        },
+
+        {
+            question: "When was the Declaration of Independence signed?",
+            choices: ["1770", "1801", "1776", "1769"],
+            correctAnswer: "1776"
+        }
     ]
 
 // variables
@@ -51,10 +83,10 @@ $(document).ready(function () {
 
     //loads random question, once start button is clicked
     //gives 10 second counter for each question.
-    // loads chioces and gives the id the value of the answers index
+    // loads choices and gives the id the value of the answers index
     function loadQuestion() {
         answered = false;
-        counter = 11;
+        counter = 16;
         timer = setInterval(timer, 1000);
         correctAnswer = quizQuestions[currentQuestion].correctAnswer;
         var question = quizQuestions[currentQuestion].question;
@@ -106,6 +138,8 @@ $(document).ready(function () {
 //if there are still questions left, it will go to the next question
 //if all questions are asked, results will be presented
     function nextQuestion() {
+        var questionTotal = quizQuestions.length;
+        console.log(questionTotal)
         currentQuestion++;
         answered = false;
         if (currentQuestion < quizQuestions.length) {
@@ -114,7 +148,8 @@ $(document).ready(function () {
         else {
             $('#questions').remove();
             $('#time-left').remove();
-            $('#correct').append('<h4>Your Score is: ' + correct + ' out of 4 questions!</h4>')
+            $('#correct').append('<h4>Your Score is: ' + correct + ' out of ' + questionTotal + ' questions!</h4>');
+
         }
     }
 
@@ -132,7 +167,7 @@ $(document).ready(function () {
         if (counter === 0) {
             answered = true;
             clearInterval(timer);
-            $('#questions').html("correct");
+            $('#questions').html("WRONG");
         }
         else if (answered === true) {
             clearInterval(timer);
