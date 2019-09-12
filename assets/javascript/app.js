@@ -53,7 +53,7 @@ $(document).ready(function () {
         answered = false;
         counter = 11;
         timer = setInterval(timer, 1000);
-        correct = quizQuestions[currentQuestion].correctAnswer;
+        correctAnswer = quizQuestions[currentQuestion].correctAnswer;
         var question = quizQuestions[currentQuestion].question;
         var correctAnswer = quizQuestions[currentQuestion].correctAnswer;
         $('#questions').text(question);
@@ -105,8 +105,7 @@ $(document).ready(function () {
         else {
             $('#questions').remove();
             $('#time-left').remove();
-            $('#correct').append('<h4>Correct Answers: ' + correct + '</h4>')
-            $('#incorrect').append('<h4>Incorrect Answers: ' + incorrect + '</h4>');
+            $('#correct').append('<h4>Your Score is: ' + correct + ' Out of 4 questions!</h4>')
         }
     }
 
