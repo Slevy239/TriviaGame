@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
 
-    var quizQuestions = [
+    var quizQuestions = [ //question and answer array
         {
             question: "When did Phish start performing as a band?",
             choices: ["1985", "1990", "1983", "1993"],
@@ -31,7 +31,7 @@ $(document).ready(function () {
         },
     ]
 
-
+// variables
     var counter = 10;
     var currentQuestion = 0;
     var correct = 0;
@@ -39,7 +39,9 @@ $(document).ready(function () {
     var timer;
     var correctAnswer;
 
-    function startGame() {
+//start game function removes button, resets score and loads first question
+
+    function startGame() { 
         $('#start').remove();
         currentQuestion = 0;
         correct = 0;
@@ -49,6 +51,7 @@ $(document).ready(function () {
 
     //loads random question, once start button is clicked
     //gives 10 second counter for each question.
+    // loads chioces and gives the id the value of the answers index
     function loadQuestion() {
         answered = false;
         counter = 11;
@@ -62,8 +65,11 @@ $(document).ready(function () {
             $('#choices').append('<h4 id=' + i + '>' + newChoices + '</h4>')
         }
 
+
+        //when the h4 tag is clicked, the validity is checked with the correct answer
+        //it removes the choices
+        //adds score if it was right or wrong and loads the respective function
         $("h4").click(function () {
-            
             if ($(this).text() === correctAnswer) {
                 $('#choices').text('');
                 answered = true;
@@ -78,7 +84,7 @@ $(document).ready(function () {
     }
 
     function rightAnswer() {
-        //show the answer and score for 3 seconds then move to next question
+        //loads next question
             $('#questions').html('Correct answer!')
             $('#choices').html('')
             nextQuestion()
@@ -86,6 +92,7 @@ $(document).ready(function () {
     }
 
     function wrongAnswer() {
+        //shows correct answer and loads next question  
             $('#questions').html('the answer is: ' + quizQuestions[currentQuestion].correctAnswer)
             $('#choices').html('')
 
@@ -94,8 +101,10 @@ $(document).ready(function () {
 
 
 
-
-
+//goes to next question
+//resets timer
+//if there are still questions left, it will go to the next question
+//if all questions are asked, results will be presented
     function nextQuestion() {
         currentQuestion++;
         answered = false;
@@ -105,18 +114,20 @@ $(document).ready(function () {
         else {
             $('#questions').remove();
             $('#time-left').remove();
-            $('#correct').append('<h4>Your Score is: ' + correct + ' Out of 4 questions!</h4>')
+            $('#correct').append('<h4>Your Score is: ' + correct + ' out of 4 questions!</h4>')
         }
     }
 
 
-
+//on click function 
     $('#start').on("click", function () {
         $('#start');
         startGame()
     })
 
-
+// timer function
+//when it hits 0, interval will be stopped,
+//otherwise, the clock will continue to countdown
     function timer() {
         if (counter === 0) {
             answered = true;
