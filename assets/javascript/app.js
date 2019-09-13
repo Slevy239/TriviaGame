@@ -115,7 +115,9 @@ $(document).ready(function () {
                 incorrect++
 
                 $('#questions').append('<div>');
-                $('#questions').text('WRONG!, the answer was: ' + quizQuestions[currentQuestion].correctAnswer)
+                $('#questions').text('WRONG!, the answer was: ' + quizQuestions[currentQuestion].correctAnswer);
+                $('#choices').html('')
+
                 setTimeout(wrongAnswer, 1000 * 5);
             }
         })
