@@ -1,7 +1,13 @@
+.jumbotron {
+    background: black;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
 body {
     background-image: url(../images/trivia-background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 h1 {
