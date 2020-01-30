@@ -1,5 +1,7 @@
 # TriviaGame
 
+## Live Link
+* https://slevy239.github.io/TriviaGame
 
 ## How To Play
 To begin the game, click the start button and questions with thier choices will be presented.
